@@ -26,14 +26,14 @@
             <div>
                 <p class="text-sm text-gray-600 mb-2">Get your IP using curl:</p>
                 <div class="bg-gray-50 p-3 rounded">
-                    <p class="text-sm font-mono">curl {{ url('/api') }}</p>
+                    <p class="text-sm font-mono">curl {{ url('/ip') }}</p>
                 </div>
             </div>
 
             <div>
                 <p class="text-sm text-gray-600 mb-2">Get only the IP address:</p>
                 <div class="bg-gray-50 p-3 rounded">
-                    <p class="text-sm font-mono">curl {{ url('/api') }} | jq -r .ip</p>
+                    <p class="text-sm font-mono">curl {{ url('/ip') }} | jq -r .ip</p>
                 </div>
             </div>
 

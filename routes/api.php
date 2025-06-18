@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\IpController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +19,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/', function (Request $request) {
-    return response()->json(['ip' => $request->ip()]);
-});
+Route::get('/', [IpController::class, 'index']);
 
 Route::get('/ip', function (Request $request) {
-    return response()->json(['ip' => $request->ip()]);
+    $ip = $request->ip();
+    $userAgent = $request->userAgent();
+
+    if ($request->wantsJson() || $request->is('api/*')) {
+        return response()->json([
+            'ip' => $ip,
+            'user_agent' => $userAgent
+        ]);
+    }
 });

@@ -4,16 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class IpController extends Controller
+class IpApiController extends Controller
 {
     public function index(Request $request)
     {
-        // Get real IP address
         $ip = $request->header('X-Forwarded-For') ?: 
               $request->header('X-Real-IP') ?: 
               $request->ip();
         
-        // If IP is still localhost, try to get public IP
         if ($ip === '127.0.0.1' || $ip === '::1') {
             try {
                 $publicIp = file_get_contents('https://api.ipify.org');
@@ -24,13 +22,10 @@ class IpController extends Controller
                 // If we can't get public IP, keep the current IP
             }
         }
-        
         $userAgent = $request->header('User-Agent');
-        
-        // Hanya return view HTML
-        return view('ip', [
+        return response()->json([
             'ip' => $ip,
-            'userAgent' => $userAgent
+            'user_agent' => $userAgent
         ]);
     }
 } 

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IpController;
+use App\Http\Controllers\IpApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,4 @@ Route::get('/', function () {
 });
 
 Route::get('/', [IpController::class, 'index']);
-Route::get('/api', [IpController::class, 'index']);
+Route::get('/ip', [IpApiController::class, 'index']);
