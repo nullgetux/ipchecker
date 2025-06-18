@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\IpHistory;
 
 class IpController extends Controller
 {
@@ -27,6 +28,13 @@ class IpController extends Controller
         
         $userAgent = $request->header('User-Agent');
         
+        // Simpan history
+        IpHistory::create([
+            'ip' => $ip,
+            'user_agent' => $userAgent,
+            'hit_at' => now()
+        ]);
+
         // Hanya return view HTML
         return view('ip', [
             'ip' => $ip,

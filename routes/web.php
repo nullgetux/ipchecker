@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IpController;
 use App\Http\Controllers\IpApiController;
+use App\Http\Controllers\HistoryController;
+use App\Models\IpHistory;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +23,4 @@ Route::get('/', function () {
 
 Route::get('/', [IpController::class, 'index']);
 Route::get('/ip', [IpApiController::class, 'index']);
+Route::get('/history', [HistoryController::class, 'index']);

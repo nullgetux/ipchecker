@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\IpHistory;
 
 class IpApiController extends Controller
 {
@@ -22,7 +23,16 @@ class IpApiController extends Controller
                 // If we can't get public IP, keep the current IP
             }
         }
+        
         $userAgent = $request->header('User-Agent');
+
+        // Simpan history
+        IpHistory::create([
+            'ip' => $ip,
+            'user_agent' => $userAgent,
+            'hit_at' => now()
+        ]);
+        
         return response()->json([
             'ip' => $ip,
             'user_agent' => $userAgent
